@@ -1,0 +1,12 @@
+// Exemplo fictício para carregar a loja no seu Frontend
+async function carregarLojaFortnite() {
+    const resposta = await fetch('https://fortnite-api.com');
+    const dados = await resposta.json();
+    
+    const itensDaLoja = dados.data.featured.entries; // Puxa os itens em destaque
+    
+    itensDaLoja.forEach(item => {
+        console.log(`Item: ${item.name} - Preço: ${item.finalPrice} V-Bucks`);
+        // Aqui você insere o HTML para criar o card com a imagem do item
+    });
+}
