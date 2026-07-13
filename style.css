@@ -153,3 +153,22 @@ padding:25px;
 text-align:center;
 
 }
+#loja{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+margin-top:20px;
+}
+
+.item-loja{
+background:#1b1b1b;
+padding:15px;
+border-radius:12px;
+text-align:center;
+width:170px;
+}
+
+.item-loja img{
+width:100%;
+border-radius:10px;
+}
