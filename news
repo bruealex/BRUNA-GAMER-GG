@@ -1,279 +1,38 @@
-https://fortnite-api.com/v2/cosmetics<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BRUNA GAMER</title>
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-background:#09040f;
-color:white;
-}
-
-/* CAPA */
-
-header{
-
-height:100vh;
-
-background:
-radial-gradient(circle at top,#ff1493,#250033 35%,#000);
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-text-align:center;
-
-overflow:hidden;
-
-}
-
-
-h1{
-
-font-size:80px;
-
-color:#ff3bb8;
-
-text-shadow:
-0 0 10px #ff1493,
-0 0 30px #ff1493,
-0 0 60px #9b00ff;
-
-animation:pulse 2s infinite;
-
-}
-
-
-h2{
-
-margin-top:20px;
-
-font-size:32px;
-
-color:#fff;
-
-}
-
-
-p{
-
-margin-top:20px;
-
-font-size:22px;
-
-color:#ddd;
-
-}
-
-
-
-/* BOTÃO */
-
-button{
-
-margin-top:40px;
-
-padding:20px 50px;
-
-font-size:22px;
-
-font-weight:bold;
-
-border:none;
-
-border-radius:50px;
-
-background:linear-gradient(90deg,#ff1493,#8a2be2);
-
-color:white;
-
-cursor:pointer;
-
-box-shadow:
-0 0 20px #ff1493;
-
-transition:.3s;
-
-}
-
-
-button:hover{
-
-transform:scale(1.1);
-
-box-shadow:
-0 0 40px #ff1493;
-
-}
-
-
-
-/* ANIMAÇÃO */
-
-@keyframes pulse{
-
-0%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(1.05);
-}
-
-100%{
-transform:scale(1);
-}
-
-}
-
-
-
-/* SEÇÃO MAPAS */
-
-section{
-
-padding:60px 20px;
-
-text-align:center;
-
-}
-
-
-.card{
-
-display:inline-block;
-
-background:#170022;
-
-width:300px;
-
-padding:30px;
-
-margin:20px;
-
-border-radius:20px;
-
-box-shadow:0 0 20px #ff1493;
-
-}
-
-
-.card h3{
-
-color:#ff3bb8;
-
-font-size:25px;
-
-}
-
-
-.card p{
-
-font-size:18px;
-
-}
-
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<header>
-
-
-<h1>BRUNA GAMER</h1>
-
-
-<h2>🎮 Criadora de Conteúdo Fortnite</h2>
-
-
-<p>
-Bem-vindo ao Portal Oficial<br>
-Mapas • Lives • Conteúdo Gamer
-</p>
-
-
-<button>
-🎮 MEUS MAPAS
-</button>
-
-
-</header>
-
-
-
-<section>
-
-
-<h2>
-🔥 Meus Projetos
-</h2>
-
-
-<div class="card">
-
-<h3>
-CITY TYCOON
-</h3>
-
-<p>
-Construa sua cidade,
-ganhe dinheiro e evolua.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-RAMP CITY
-</h3>
-
-<p>
-Corridas insanas e desafios.
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>
-PIT ARENA
-</h3>
-
-<p>
-Batalhas sem limite.
-</p>
-
-</div>
-
-
-
+<!-- Estrutura HTML (Onde os dados vão aparecer) -->
+<section id="fortnite-news">
+  <h2>Últimas Notícias</h2>
+  <div id="news-container">Carregando notícias...</div>
 </section>
 
+<section id="fortnite-shop">
+  <h2>Loja de Hoje</h2>
+  <div id="shop-container">Carregando loja...</div>
+</section>
 
-</body>
-</html>
+<script>
+  // Função para buscar e renderizar as notícias no site
+  async function carregarNoticias() {
+    try {
+      const resposta = await fetch('https://fortnite-api.com');
+      const resultado = await respuesta.json();
+      const noticias = resultado.data.br.motds; // Captura notícias do Battle Royale
+      
+      let html = '';
+      noticias.forEach(item => {
+        html += `
+          <div class="news-card">
+            <img src="${item.image}" alt="${item.title}" style="width:300px;">
+            <h3>${item.title}</h3>
+            <p>${item.body}</p>
+          </div>
+        `;
+      });
+      document.getElementById('news-container').innerHTML = html;
+    } catch (erro) {
+      document.getElementById('news-container').innerHTML = 'Erro ao carregar notícias.';
+    }
+  }
+
+  // Executa a função ao carregar a página
+  carregarNoticias();
+</script>
