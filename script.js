@@ -22,12 +22,13 @@ carregarDadosYT();
 function copiarCodigo(codigo) { navigator.clipboard.writeText(codigo); alert("CÓDIGO COPIADO: " + codigo + " 💖"); }
 function copiarTag() { navigator.clipboard.writeText("BRUNAGAMER"); alert("TAG BRUNAGAMER COPIADA! 💖"); }
 
-// LOJA FORTNITE COM PROXY
+// PUXAR LOJA DO FORTNITE - JÁ COM O LINK
 async function carregarLojaFortnite() {
   const container = document.getElementById("itens-loja");
   if(!container) return;
 
   try {
+    // AQUI ESTÁ O LINK QUE VOCÊ PRECISA COLAR
     const res = await fetch('https://api.allorigins.win/raw?url=https://fnbr.co/api/shop');
     const data = await res.json();
     container.innerHTML = "";
@@ -50,4 +51,5 @@ async function carregarLojaFortnite() {
   }
 }
 
+// Isso aqui faz a loja carregar quando abrir a página
 window.addEventListener('load', carregarLojaFortnite);
