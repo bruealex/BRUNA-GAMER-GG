@@ -1,7 +1,7 @@
 const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
 const CHANNEL_ID = "UCJfZ8_3Ir0ExpXaEKk24qQw";
 const API_KEY_FORT = "e90b3fda0fa58e5e071b2d8a516d9469684d6b4c1d26243f41bb02781f740319"; // PEGA EM https://fortniteapi.io
-const API_URL = "https://fortniteapi.io/v2";
+const API_URL = "https://www.api-fortnite.com/";
 
 // 1. YOUTUBE
 async function carregarDadosYT() {
