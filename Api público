@@ -1,1 +1,59 @@
+<!-- Campo de busca para o usuário -->
+<div class="search-box">
+  <input type="text" id="fortnite-username" placeholder="Digite seu apelido da Epic Games...">
+  <button onclick="buscarEstatisticas()">Buscar Estatísticas</button>
+</div>
 
+<!-- Contêiner onde os resultados serão exibidos -->
+<div id="stats-result"></div>
+
+<script>
+async function buscarEstatisticas() {
+  const username = document.getElementById('fortnite-username').value.trim();
+  const resultDiv = document.getElementById('stats-result');
+  
+  if (!username) {
+    resultDiv.innerHTML = '<p style="color: red;">Por favor, digite um apelido.</p>';
+    return;
+  }
+
+  resultDiv.innerHTML = '<p>Buscando dados...</p>';
+
+  try {
+    // Requisição para a API passando o nome digitado pelo usuário
+    const resposta = await fetch(`https://fortnite-api.com{encodeURIComponent(username)}`);
+    const dados = await resposta.json();
+
+    if (dados.status === 404) {
+      resultDiv.innerHTML = '<p style="color: red;">Jogador não encontrado. Verifique o nome ou se a conta está privada.</p>';
+      return;
+    }
+
+    if (dados.status !== 200) {
+      resultDiv.innerHTML = '<p style="color: red;">Erro ao buscar dados. Tente novamente mais tarde.</p>';
+      return;
+    }
+
+    // Extraindo dados gerais do histórico (All) do Battle Royale
+    const statsgerais = dados.data.stats.all.overall;
+
+    // Renderizando os resultados na tela
+    resultDiv.innerHTML = `
+      <div class="player-card">
+        <h3>Estatísticas de: ${dados.data.account.name}</h3>
+        <p><strong>Nível da Conta:</strong> ${dados.data.battlePass.level}</p>
+        <hr>
+        <p><strong>Vitórias:</strong> ${statsgerais.wins}</p>
+        <p><strong>Abates (Kills):</strong> ${statsgerais.kills}</p>
+        <p><strong>Partidas Jogadas:</strong> ${statsgerais.matches}</p>
+        <p><strong>Taxa de Vitória:</strong> ${statsgerais.winRate.toFixed(2)}%</p>
+        <p><strong>K/D (Abates/Mortes):</strong> ${statsgerais.kd.toFixed(2)}</p>
+      </div>
+    `;
+
+  } catch (erro) {
+    console.error(erro);
+    resultDiv.innerHTML = '<p style="color: red;">Erro de conexão com o servidor da API.</p>';
+  }
+}
+</script>
