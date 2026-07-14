@@ -200,3 +200,50 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
 @keyframes piscar {
  50% { border-color: transparent }
 }
+
+/* SEÇÃO LOJA FORTNITE */
+.grid-loja {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card-loja {
+  background: #1a1a1a;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+  border: 2px solid transparent;
+}
+
+.card-loja:hover {
+  transform: scale(1.05);
+  border-color: #ff00ff;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.card-loja img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card-loja h3 {
+  font-size: 16px;
+  margin: 10px 0 5px 0;
+  color: white;
+}
+
+.preco {
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* CORES POR RARIDADE */
+.raridade.Comum { color: #a1a1a1; }
+.raridade.Incomum { color: #2ecc71; }
+.raridade.Raro { color: #3498db; }
+.raridade.Épico { color: #9b59b6; }
+.raridade.Lendário { color: #f39c12; }
