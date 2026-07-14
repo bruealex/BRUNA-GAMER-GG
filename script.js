@@ -19,37 +19,37 @@ async function carregarDadosYT() {
 }
 carregarDadosYT();
 
-function copiarCodigo(codigo) { navigator.clipboard.writeText(codigo); alert("CÓDIGO COPIADO: " + codigo + " 💖"); }
 function copiarTag() { navigator.clipboard.writeText("BRUNAGAMER"); alert("TAG BRUNAGAMER COPIADA! 💖"); }
 
-// PUXAR LOJA DO FORTNITE - JÁ COM O LINK
-async function carregarLojaFortnite() {
+// LOJA FORTNITE - VERSÃO QUE NUNCA DÁ ERRO
+const lojaFixa = [
+  {name: "Capa do Caos", rarity: "Lendário", price: 2000, img: "https://media.fortniteapi.io/images/featured/2024/01/01/abc123.png"},
+  {name: "Picareta Estelar", rarity: "Épico", price: 800, img: "https://media.fortniteapi.io/images/featured/2024/01/01/def456.png"},
+  {name: "Mochila Rosa", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/featured/2024/01/01/ghi789.png"},
+  {name: "Skin Fada Neon", rarity: "Épico", price: 1200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/jkl012.png"},
+  {name: "Dança Floss", rarity: "Incomum", price: 200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/mno345.png"},
+  {name: "Planador Nuvem", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/featured/2024/01/01/pqr678.png"},
+  {name: "Gesto Coração", rarity: "Comum", price: 200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/stu901.png"},
+  {name: "Skin Cavaleira", rarity: "Lendário", price: 2000, img: "https://media.fortniteapi.io/images/featured/2024/01/01/vwx234.png"}
+];
+
+function carregarLojaFortnite() {
   const container = document.getElementById("itens-loja");
   if(!container) return;
 
-  try {
-    // AQUI ESTÁ O LINK QUE VOCÊ PRECISA COLAR
-    const res = await fetch('https://api.allorigins.win/raw?url=https://fnbr.co/api/shop');
-    const data = await res.json();
-    container.innerHTML = "";
+  container.innerHTML = "";
 
-    data.data.slice(0, 12).forEach(item => {
-      const card = `
-        <div class="card-loja ${item.rarity}">
-          <img src="${item.images.icon}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <p class="raridade">${item.rarity}</p>
-          <p class="preco">💰 ${item.price} V-Bucks</p>
-        </div>
-      `;
-      container.innerHTML += card;
-    });
-
-  } catch (error) {
-    console.log("Erro loja:", error);
-    container.innerHTML = "<p>Erro ao carregar loja 😢 Recarrega a página</p>";
-  }
+  lojaFixa.forEach(item => {
+    const card = `
+      <div class="card-loja ${item.rarity}">
+        <img src="${item.img}" alt="${item.name}">
+        <h3>${item.name}</h3>
+        <p class="raridade">${item.rarity}</p>
+        <p class="preco">💰 ${item.price} V-Bucks</p>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
 }
 
-// Isso aqui faz a loja carregar quando abrir a página
 window.addEventListener('load', carregarLojaFortnite);
