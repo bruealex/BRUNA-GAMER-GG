@@ -1,34 +1,40 @@
-// SEU CANAL: @brunagamerrr
-const CHANNEL_HANDLE = "@brunagamerrr";
+const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak"; // <- NÃO ESQUECE DE COLAR SUA CHAVE AQUI
+const CHANNEL_ID = "UCJfZ8_3Ir0ExpXaEKk24qQw"; // <- ID DO SEU CANAL
 
-// PEGAR KEY GRÁTIS: https://console.cloud.google.com/ > YouTube Data API v3
-const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
+async function carregarDadosYT() {
+  try {
+    // 1. Pega o ÚLTIMO VÍDEO
+    const urlVideos = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&channelId=${CHANNEL_ID}&order=date&part=snippet&type=video&maxResults=1`;
+    const resVideos = await fetch(urlVideos);
+    const dataVideos = await resVideos.json();
 
-// BUSCA O ID DO CANAL PELO @ E PEGA DADOS
-fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&q=${CHANNEL_HANDLE}&type=channel&part=snippet`)
-.then(res => res.json())
-.then(data => {
-  const CHANNEL_ID = data.items[0].id.channelId;
+    if(dataVideos.items && dataVideos.items.length > 0){
+      const videoId = dataVideos.items[0].id.videoId;
+      document.getElementById("video").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    }
 
-  // ÚLTIMO VÍDEO
-  fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&channelId=${CHANNEL_ID}&order=date&part=snippet&type=video&maxResults=1`)
- .then(res => res.json())
- .then(videoData => {
-    const videoId = videoData.items[0].id.videoId;
-    document.getElementById("video").innerHTML =
-    `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-  });
+    // 2. Pega INSCRITOS
+    const urlCanal = `https://www.googleapis.com/youtube/v3/channels?key=${API_KEY_YT}&id=${CHANNEL_ID}&part=statistics`;
+    const resCanal = await fetch(urlCanal);
+    const dataCanal = await resCanal.json();
+    const inscritos = parseInt(dataCanal.items[0].statistics.subscriberCount).toLocaleString('pt-BR');
+    document.getElementById("contInscritos").innerText = inscritos;
 
-  // CONTADOR DE INSCRITOS
-  fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY_YT}`)
- .then(res => res.json())
- .then(channelData => {
-    const inscritos = channelData.items[0].statistics.subscriberCount;
-    document.getElementById("contInscritos").innerText = parseInt(inscritos).toLocaleString("pt-BR");
-  });
-});
+  } catch (error) {
+    console.log("Erro ao carregar dados do YT:", error);
+  }
+}
 
+carregarDadosYT();
+
+// FUNÇÃO PRA COPIAR CÓDIGO DAS ILHAS
+function copiarCodigo(codigo) {
+  navigator.clipboard.writeText(codigo);
+  alert("CÓDIGO COPIADO: " + codigo + " 💖");
+}
+
+// FUNÇÃO PRA COPIAR TAG
 function copiarTag() {
   navigator.clipboard.writeText("BRUNAGAMER");
-  alert("TAG COPIADA! BRUNAGAMER 💖");
+  alert("TAG BRUNAGAMER COPIADA! 💖");
 }
