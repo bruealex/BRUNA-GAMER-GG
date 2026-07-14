@@ -1,59 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap');
 
 :root {
   --rosa-neon: #FF00FF;
   --rosa-escuro: #C90076;
-  --fundo: #0A0A1A;
+  --roxo-fundo: #0A0A1A;
+  --roxo-card: #1A1A2E;
   --branco: #FFFFFF;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: var(--fundo);
+  background: linear-gradient(180deg, #0A0A1A 0%, #140029 100%);
   color: var(--branco);
-  font-family: 'Orbitron', sans-serif;
-  background-image: radial-gradient(circle at 50% 0%, rgba(255,0,255,0.1) 0%, transparent 50%);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.5px; /* letras menos coladas */
 }
 
 header {
-  background: linear-gradient(180deg, #000 0%, var(--fundo) 100%);
-  padding: 20px;
-  text-align: center;
-  border-bottom: 3px solid var(--rosa-neon);
-  box-shadow: 0 0 20px var(--rosa-neon);
+  padding: 80px 20px;
+  border-bottom: 2px solid rgba(255,0,255,0.3);
 }
-
-h1 {
+header h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 3.5rem;
+  font-size: 5rem;
+  letter-spacing: 4px; /* espaçamento no título */
   background: linear-gradient(180deg, #fff 0%, var(--rosa-neon) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px var(--rosa-neon);
+  text-shadow: 0 0 25px rgba(255,0,255,0.6);
+  animation: neonPulse 2s infinite alternate;
+}
+@keyframes neonPulse {
+  from { text-shadow: 0 0 10px rgba(255,0,255,0.5); }
+  to { text-shadow: 0 0 30px rgba(255,0,255,0.9); }
+}
+header h1 span { color: var(--rosa-neon); }
+header p {
+  font-size: 1.2rem;
+  color: #bbb;
+  margin-top: 15px;
+  letter-spacing: 2px;
+}
+.inscritos {
+  margin-top: 20px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--rosa-neon);
 }
 
-.btn, button {
-  background: linear-gradient(90deg, var(--rosa-escuro), var(--rosa-neon));
-  border: none;
-  padding: 12px 25px;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 0 15px var(--rosa-neon);
+section {
+  padding: 70px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+section h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 3px;
+  color: var(--rosa-neon);
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px rgba(255,0,255,0.5);
+}
+
+/* VIDEO */
+#video iframe {
+  border-radius: 20px;
+  border: 2px solid var(--rosa-neon);
+  box-shadow: 0 0 30px rgba(255,0,255,0.4);
+  max-width: 900px;
+  width: 90%;
+  height: 500px;
+}
+
+/* TAG CARD */
+.tag-box {
+  background: linear-gradient(135deg, var(--rosa-escuro), var(--rosa-neon));
+  display: inline-block;
+  padding: 30px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(255,0,255,0.4);
+  transform: translateY(0);
   transition: 0.3s;
 }
-.btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--rosa-neon); }
-
-.card-loja {
-  background: #1A1A2E;
-  border: 2px solid var(--rosa-escuro);
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 0 10px rgba(255,0,255,0.3);
+.tag-box:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(255,0,255,0.6); }
+.tag-box p {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  font-family: 'Bebas Neue', sans-serif;
 }
-.card-loja:hover {
-  border-color: var(--rosa-neon);
-  box-shadow: 0 0 20px var(--rosa-neon);
+.tag-box button {
+  margin-top: 20px;
+  background: #000;
+  color: var(--rosa-neon);
+  border: 2px solid var(--rosa-neon);
+  padding: 12px 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+.tag-box button:hover { background: var(--rosa-neon); color: #000; }
+
+/* BOTOES REDES */
+.botoes { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  text-decoration: none;
+  padding: 18px 35px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: white;
+  transition: 0.3s;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+.btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 30px rgba(255,0,255,0.5); }
+.youtube { background: #FF0000; }
+.twitch { background: #9146FF; }
+.insta { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+
+footer {
+  padding: 40px;
+  border-top: 1px solid rgba(255,0,255,0.2);
+  color: #777;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
 }
