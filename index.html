@@ -12,13 +12,14 @@
     <div class="links">
       <a href="#">INÍCIO</a>
       <a href="#sobre">SOBRE MIM</a>
+      <a href="#loja">LOJA</a>
       <a href="#redes">REDES</a>
     </div>
   </nav>
 
   <header class="banner">
     <div class="caixa-branca">
-      <h1>BRUNA GAMER</h1>
+      <h1 class="titulo-digita">BRUNA GAMER</h1>
     </div>
     <div class="caixa-rosa">
       <p>Criadora de Conteúdo & Mapas no Fortnite</p>
@@ -26,7 +27,7 @@
     <div class="caixa-branca-pequena">
       <p>"Bem-vindo ao meu site oficial! Aqui você encontra os códigos das minhas ilhas do Criativo, novidades sobre o modo Salve o Mundo, LEGO e minhas transmissões ao vivo. Obrigado por fazer parte da nossa comunidade!"</p>
     </div>
-    <a href="https://youtube.com/@brunagamerrr" target="_blank" class="btn-rosa">Clique aqui</a>
+    <a href="https://youtube.com/@brunagamerrr" target="_blank" class="btn-rosa btn-neon">Clique aqui</a>
   </header>
 
   <section id="sobre" class="secao-branca">
@@ -41,15 +42,24 @@
     </div>
   </section>
 
-  <section id="tag" class="secao-rosa">
-    <h2>USE MINHA TAG DE APOIADOR</h2>
-    <div class="tag-box">
-      <p>BRUNAGAMER</p>
-      <button onclick="copiarTag()">COPIAR TAG</button>
+  <!-- SEÇÃO DA LOJA FORTNITE -->
+  <section id="loja" class="secao-rosa">
+    <h2 class="titulo-digita">🔥 LOJA DE HOJE 🔥</h2>
+    <p>Atualiza todo dia às 21h</p>
+    <div id="itens-loja" class="grid-loja">
+      <p>Carregando loja...</p>
     </div>
   </section>
 
-  <section id="redes" class="secao-branca">
+  <section id="tag" class="secao-branca">
+    <h2>USE MINHA TAG DE APOIADOR</h2>
+    <div class="tag-box">
+      <p>BRUNAGAMER</p>
+      <button class="btn-neon" onclick="copiarTag()">COPIAR TAG</button>
+    </div>
+  </section>
+
+  <section id="redes" class="secao-rosa">
     <h2>ME SIGA NAS REDES</h2>
     <div class="botoes">
       <a href="https://youtube.com/@brunagamerrr" target="_blank" class="btn youtube">YOUTUBE</a>
@@ -65,11 +75,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-<section id="loja">
-  <h2 class="titulo-digita">🔥 LOJA DE HOJE 🔥</h2>
-  <p>Atualiza todo dia às 21h</p>
-  <div id="itens-loja" class="grid-loja">
-    <!-- Os itens vão carregar aqui automático -->
-    <p>Carregando loja...</p>
-  </div>
-</section>
