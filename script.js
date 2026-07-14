@@ -2,7 +2,7 @@
 const CHANNEL_HANDLE = "@brunagamerrr";
 
 // PEGAR KEY GRÁTIS: https://console.cloud.google.com/ > YouTube Data API v3
-const API_KEY_YT = "COLA_SUA_KEY_DO_YOUTUBE_AQUI";
+const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
 
 // BUSCA O ID DO CANAL PELO @ E PEGA DADOS
 fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&q=${CHANNEL_HANDLE}&type=channel&part=snippet`)
