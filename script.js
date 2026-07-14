@@ -38,3 +38,35 @@ function copiarTag() {
   navigator.clipboard.writeText("BRUNAGAMER");
   alert("TAG BRUNAGAMER COPIADA! 💖");
 }
+
+// PUXAR LOJA DO FORTNITE EM TEMPO REAL
+async function carregarLojaFortnite() {
+  try {
+    // API pública gratuita
+    const res = await fetch('https://fortnite-api.com/v2/shop/br');
+    const data = await res.json();
+    const container = document.getElementById("itens-loja");
+    container.innerHTML = ""; // limpa o "carregando"
+
+    // Pega só os itens em destaque + diários
+    const itens = [...data.data.featured.entries, ...data.data.daily.entries];
+
+    itens.forEach(item => {
+      const card = `
+        <div class="card-loja">
+          <img src="${item.items[0].images.icon}" alt="${item.items[0].name}">
+          <h3>${item.items[0].name}</h3>
+          <p class="raridade ${item.items[0].rarity.value}">${item.items[0].rarity.displayValue}</p>
+          <p class="preco">💰 ${item.finalPrice} V-Bucks</p>
+        </div>
+      `;
+      container.innerHTML += card;
+    });
+
+  } catch (error) {
+    console.log("Erro ao carregar loja:", error);
+    document.getElementById("itens-loja").innerHTML = "<p>Erro ao carregar loja 😢</p>";
+  }
+}
+
+carregarLojaFortnite();
