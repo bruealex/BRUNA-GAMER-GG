@@ -39,25 +39,27 @@ function copiarTag() {
   alert("TAG BRUNAGAMER COPIADA! 💖");
 }
 
-// PUXAR LOJA DO FORTNITE EM TEMPO REAL
+// PUXAR LOJA DO FORTNITE EM TEMPO REAL - VERSÃO QUE FUNCIONA
 async function carregarLojaFortnite() {
   try {
-    // API pública gratuita
-    const res = await fetch('https://fortnite-api.com/v2/shop/br');
+    const res = await fetch('https://fnbr.co/api/shop');
     const data = await res.json();
     const container = document.getElementById("itens-loja");
     container.innerHTML = ""; // limpa o "carregando"
 
-    // Pega só os itens em destaque + diários
-    const itens = [...data.data.featured.entries, ...data.data.daily.entries];
+    // A API retorna os itens direto em data.data
+    const itens = data.data;
 
     itens.forEach(item => {
+      // Pega a cor da raridade
+      let corRaridade = item.rarity;
+      
       const card = `
-        <div class="card-loja">
-          <img src="${item.items[0].images.icon}" alt="${item.items[0].name}">
-          <h3>${item.items[0].name}</h3>
-          <p class="raridade ${item.items[0].rarity.value}">${item.items[0].rarity.displayValue}</p>
-          <p class="preco">💰 ${item.finalPrice} V-Bucks</p>
+        <div class="card-loja ${corRaridade}">
+          <img src="${item.images.icon}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p class="raridade">${item.rarity}</p>
+          <p class="preco">💰 ${item.price} V-Bucks</p>
         </div>
       `;
       container.innerHTML += card;
@@ -65,7 +67,7 @@ async function carregarLojaFortnite() {
 
   } catch (error) {
     console.log("Erro ao carregar loja:", error);
-    document.getElementById("itens-loja").innerHTML = "<p>Erro ao carregar loja 😢</p>";
+    document.getElementById("itens-loja").innerHTML = "<p>Loja atualiza às 21h. Tenta recarregar a página 😢</p>";
   }
 }
 
