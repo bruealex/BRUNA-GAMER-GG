@@ -124,3 +124,105 @@ window.addEventListener('load', () => {
   carregarLojaFortnite();
   carregarTodosCosmeticos();
 });
+
+const API_URL = "https://fortniteapi.io/v2"; // API que você mostrou na print
+
+// 1. LOJA ATUALIZANDO 21H
+async function carregarLojaFortnite() {
+  const container = document.getElementById("grid-loja");
+  if(!container) return;
+  
+  container.innerHTML = "<p>Carregando loja...</p>";
+
+  try {
+    const resposta = await fetch(`${API_URL}/shop?lang=pt-BR`);
+    const dados = await resposta.json();
+    
+    container.innerHTML = "";
+    dados.items.forEach(item => {
+      const card = `
+        <div class="card-loja ${item.rarity}">
+          <div class="raridade">${item.rarity}</div>
+          <img src="${item.images.icon}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p class="preco">${item.price} V-Bucks</p>
+        </div>
+      `;
+      container.innerHTML += card;
+    });
+
+    // Mostra quando atualiza
+    const proxUpdate = new Date();
+    proxUpdate.setHours(21, 0, 0, 0);
+    if(proxUpdate < new Date()) proxUpdate.setDate(proxUpdate.getDate() + 1);
+    
+    document.getElementById("timer-loja").innerText = `Próxima atualização: ${proxUpdate.toLocaleTimeString('pt-BR')}`;
+
+  } catch(erro) {
+    console.log("Erro loja:", erro);
+  }
+}
+
+// 2. MISSÕES SALVE O MUNDO EM TEMPO REAL
+async function carregarMissoesSTM() {
+  const container = document.getElementById("grid-missoes");
+  if(!container) return;
+  
+  container.innerHTML = "<p>Carregando missões...</p>";
+
+  try {
+    const resposta = await fetch(`${API_URL}/stwmissions?lang=pt-BR`);
+    const dados = await resposta.json();
+    
+    container.innerHTML = "";
+    dados.missions.forEach(missao => {
+      const card = `
+        <div class="card-missao">
+          <h3>${missao.name}</h3>
+          <p><b>Tipo:</b> ${missao.type}</p>
+          <p><b>Recompensa:</b> ${missao.reward}</p>
+          <p><b>Mapa:</b> ${missao.map}</p>
+        </div>
+      `;
+      container.innerHTML += card;
+    });
+
+  } catch(erro) {
+    console.log("Erro missões:", erro);
+  }
+}
+
+// 3. ILHAS
+async function carregarIlhas() {
+  const container = document.getElementById("grid-ilhas");
+  if(!container) return;
+  
+  // Se a API de ilhas não funcionar, deixa manual aqui
+  const minhasIlhas = [
+    {nome: "NITRO RAMP 1V1", codigo: "7154-6149-1460", descricao: "Treino de Ramp", img: "https://placehold.co/300x160/8A2BE2/FFFFFF"}
+  ];
+
+  container.innerHTML = "";
+  minhasIlhas.forEach(ilha => {
+    const card = `
+      <div class="card-ilha">
+        <img src="${ilha.img}" alt="${ilha.nome}">
+        <h3>${ilha.nome}</h3>
+        <p>${ilha.descricao}</p>
+        <div class="codigo-ilha" onclick="navigator.clipboard.writeText('${ilha.codigo}')">CÓDIGO: ${ilha.codigo} 📋</div>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
+}
+
+// ATUALIZA AUTOMÁTICO A CADA 5 MINUTOS
+window.addEventListener('load', () => {
+  carregarLojaFortnite();
+  carregarMissoesSTM();
+  carregarIlhas();
+  carregarTodosCosmeticos();
+  
+  setInterval(carregarLojaFortnite, 300000); // 5 min
+  setInterval(carregarMissoesSTM, 300000); // 5 min
+});
