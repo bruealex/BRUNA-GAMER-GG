@@ -1,4 +1,4 @@
-const API_KEY = "a549184f-2a7a-43f3-bad2-d19ca68a7f85";
+const API_KEY = "hex";
 // 1. CARREGAR LOJA AO ABRIR O SITE
 async function carregarLoja() {
     const lojaDiv = document.getElementById("loja");
