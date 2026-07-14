@@ -571,3 +571,61 @@ h1, h2, h3, p, .logo-menu, .links a, .raridade, .preco {
   border-radius: 50px;
   animation: pulsarBotao 1.5s infinite !important;
 }
+
+/* 1. TÍTULO E TODOS OS TEXTOS SEM ANIMAÇÃO */
+h1, h2, h3, p, .caixa-rosa p, .logo-menu, .links a {
+  animation: none !important;
+  background: none !important;
+  -webkit-text-fill-color: white !important;
+  -webkit-background-clip: unset !important;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important; /* só sombra pra ler */
+}
+
+/* 2. TÍTULO PRINCIPAL ESPECÍFICO */
+.caixa-branca h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white !important;
+  letter-spacing: 1px;
+  animation: none !important;
+}
+
+/* 3. "CRIADORA DE CONTEÚDO" TAMBÉM PARADO */
+.caixa-rosa p {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white !important;
+  letter-spacing: 2px;
+  animation: none !important;
+}
+
+/* 4. FUNDO DAS CAIXAS PRA APARECER */
+.caixa-branca, .caixa-branca-pequena {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0,255,255,0.5);
+  border-radius: 20px;
+  padding: 25px 40px;
+  margin: 15px auto;
+  max-width: 700px;
+}
+
+/* 5. SÓ O BOTÃO CLIQUE AQUI FICA ANIMADO */
+.btn-rosa.btn-neon {
+  background: linear-gradient(90deg, #8A2BE2, #00FFFF);
+  border: 2px solid white;
+  color: white !important;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  padding: 18px 45px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  box-shadow: 0 0 25px rgba(0,255,255,0.7);
+  animation: pulsarBotao 1.5s infinite !important;
+}
+
+@keyframes pulsarBotao {
+ 0%, 100% { transform: scale(1); }
+ 50% { transform: scale(1.05); }
+}
