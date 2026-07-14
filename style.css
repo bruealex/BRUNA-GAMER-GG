@@ -11,14 +11,14 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background: var(--preto) url('attachment://0') no-repeat center center fixed; /* SUA IMAGEM */
+  background: var(--preto) url('attachment://0') no-repeat center fixed; /* SUA IMAGEM */
   background-size: cover;
   color: #333;
 }
 
 /* MENU ROSA */
 .menu {
-  background: var(--rosa-claro);
+  background: linear-gradient(90deg, #FF00FF 0%, #FF1493 100%);
   padding: 15px 50px;
   display: flex;
   justify-content: space-between;
@@ -26,7 +26,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 20px rgba(255,0,255,0.3);
+  box-shadow: 0 4px 20px rgba(255,0,255,0.4);
 }
 .logo-menu {
   font-family: 'Bebas Neue', sans-serif;
@@ -42,8 +42,12 @@ body {
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 1px;
+  transition: 0.3s;
 }
-.links a:hover { text-shadow: 0 0 10px white; }
+.links a:hover { 
+  color: #00FFFF;
+  text-shadow: 0 0 10px #00FFFF; 
+}
 
 /* BANNER COM CAIXAS BRANCAS */
 .banner {
@@ -117,7 +121,13 @@ body {
   text-align: center;
   color: white;
 }
-.secao-branca h2, .secao-rosa h2 {
+.secao-ilha {
+  text-align: center;
+  padding: 80px 20px;
+  background: #0a0a0a;
+  color: white;
+}
+.secao-branca h2, .secao-rosa h2, .secao-ilha h2 {
   font-family: 'Bebas Neue', sans-serif;
   color: var(--rosa);
   font-size: 2.8rem;
@@ -190,6 +200,7 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
   white-space: nowrap;
   margin: 0 auto;
   animation: digitar 3s steps(11), piscar 0.75s step-end infinite;
+  width: 0;
 }
 
 @keyframes digitar {
@@ -199,19 +210,6 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
 
 @keyframes piscar {
  50% { border-color: transparent }
-}
-
-.card-loja.Comum { border: 2px solid #a1a1a1; }
-.card-loja.Incomum { border: 2px solid #2ecc71; }
-.card-loja.Raro { border: 2px solid #3498db; }
-.card-loja.Épico { border: 2px solid #9b59b6; }
-.card-loja.Lendário { border: 2px solid #f39c12; }
-.card-loja.Mítico { border: 2px solid #e74c3c; }
-
-.card-loja .raridade {
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: bold;
 }
 
 /* SEÇÃO LOJA FORTNITE */
@@ -273,41 +271,24 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
   margin-bottom: 5px;
 }
 
-/* MENU ROSA IGUAL AO BOTÃO */
-header {
-  background: linear-gradient(90deg, #FF00FF 0%, #FF1493 100%) !important;
-  box-shadow: 0 4px 20px rgba(255, 0, 255, 0.4);
-}
-
-header a {
-  color: white !important;
-  font-weight: 700;
-  transition: 0.3s;
-}
-
-header a:hover {
-  color: #00FFFF !important;
-  text-shadow: 0 0 10px #00FFFF;
-}
-
 /* BOTÃO DA ILHA FORTNITE */
 .btn-ilha {
   background: linear-gradient(90deg, #FF00FF, #00FFFF);
   color: white;
-  padding: 15px 35px;
+  padding: 18px 40px;
   border-radius: 50px;
   font-weight: 900;
   text-decoration: none;
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 25px;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   letter-spacing: 1px;
-  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
   transition: all 0.3s ease;
 }
 
 .btn-ilha:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 35px rgba(0, 255, 255, 0.8);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
 }
