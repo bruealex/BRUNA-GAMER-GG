@@ -57,3 +57,70 @@ function carregarLojaFortnite() {
 }
 
 window.addEventListener('load', carregarLojaFortnite);
+
+// TODOS OS COSMÉTICOS - LISTA FIXA
+const todosCosmeticos = [
+  {name: "Fada Aurora", rarity: "Épico", type: "Skin", img: "https://media.fortniteapi.io/images/cosmetics/br/CID_891_Athena_Commando_Fairy/featured.png"},
+  {name: "Cavaleiro do Caos", rarity: "Lendário", type: "Skin", img: "https://media.fortniteapi.io/images/cosmetics/br/CID_720_Athena_Commando_M_DarkKnight/featured.png"},
+  {name: "Ninja Rosa", rarity: "Raro", type: "Skin", img: "https://media.fortniteapi.io/images/cosmetics/br/CID_567_Athena_Commando_F_Pink/featured.png"},
+  {name: "Floss", rarity: "Incomum", type: "Dança", img: "https://media.fortniteapi.io/images/cosmetics/br/EID_Floss/featured.png"},
+  {name: "Dab", rarity: "Comum", type: "Dança", img: "https://media.fortniteapi.io/images/cosmetics/br/EID_Dab/featured.png"},
+  {name: "Coração Neon", rarity: "Incomum", type: "Dança", img: "https://media.fortniteapi.io/images/cosmetics/br/EID_HeartHands/featured.png"},
+  {name: "Varinha Mágica", rarity: "Raro", type: "Picareta", img: "https://media.fortniteapi.io/images/cosmetics/br/PID_678_Fairy/featured.png"},
+  {name: "Machado", rarity: "Comum", type: "Picareta", img: "https://media.fortniteapi.io/images/cosmetics/br/PID_111_Axe/featured.png"},
+  {name: "Asas de Cristal", rarity: "Raro", type: "Mochila", img: "https://media.fortniteapi.io/images/cosmetics/br/BID_452_Fairy/featured.png"},
+  {name: "Planador Unicórnio", rarity: "Épico", type: "Planador", img: "https://media.fortniteapi.io/images/cosmetics/br/GLD_456_Unicorn/featured.png"},
+  {name: "Skin Gato", rarity: "Épico", type: "Skin", img: "https://media.fortniteapi.io/images/cosmetics/br/CID_345_Athena_Commando_F_Cat/featured.png"},
+  {name: "Capa do Batman", rarity: "Épico", type: "Mochila", img: "https://media.fortniteapi.io/images/cosmetics/br/BID_789_Batman/featured.png"}
+];
+
+function carregarTodosCosmeticos() {
+  const container = document.getElementById("grid-cosmeticos");
+  if(!container) return;
+
+  container.innerHTML = "";
+  todosCosmeticos.forEach(item => {
+    const card = `
+      <div class="card-loja ${item.rarity}">
+        <img src="${item.img}" alt="${item.name}">
+        <p class="raridade">${item.type}</p>
+        <h3>${item.name}</h3>
+        <p class="raridade">${item.rarity}</p>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
+}
+
+function filtrarCosmeticos() {
+  const busca = document.getElementById("buscaCosmetico").value.toLowerCase();
+  const container = document.getElementById("grid-cosmeticos");
+  container.innerHTML = "";
+
+  const filtrados = todosCosmeticos.filter(item => 
+    item.name.toLowerCase().includes(busca)
+  );
+
+  if(filtrados.length === 0) {
+    container.innerHTML = "<p>Nenhum cosmético encontrado 😢</p>";
+    return;
+  }
+
+  filtrados.forEach(item => {
+    const card = `
+      <div class="card-loja ${item.rarity}">
+        <img src="${item.img}" alt="${item.name}">
+        <p class="raridade">${item.type}</p>
+        <h3>${item.name}</h3>
+        <p class="raridade">${item.rarity}</p>
+      </div>
+    `;
+    container.innerHTML += card;
+  });
+}
+
+// Chama quando a página carregar
+window.addEventListener('load', () => {
+  carregarLojaFortnite();
+  carregarTodosCosmeticos();
+});
