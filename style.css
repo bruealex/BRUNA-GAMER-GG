@@ -140,3 +140,63 @@ body {
 .insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 
 footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
+
+/* ANIMAÇÕES BRUNA GAMER GG */
+
+/* 1. BOTÃO NEON PISCANDO */
+.btn-neon {
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff00ff;
+  animation: neon 1.5s infinite alternate;
+  transition: transform 0.2s;
+}
+
+.btn-neon:hover {
+  transform: scale(1.05);
+}
+
+@keyframes neon {
+  from {
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+  to {
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+}
+
+/* 2. CARDS DAS ILHAS SUBINDO */
+.card-ilha {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-ilha:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 0, 255, 0.4);
+}
+
+/* 3. TITULO DIGITANDO */
+.titulo-digita {
+  overflow: hidden;
+  border-right: 3px solid #ff00ff;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: digitar 3s steps(11), piscar 0.75s step-end infinite;
+}
+
+@keyframes digitar {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes piscar {
+ 50% { border-color: transparent }
+}
