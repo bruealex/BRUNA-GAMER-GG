@@ -21,16 +21,20 @@ carregarDadosYT();
 
 function copiarTag() { navigator.clipboard.writeText("BRUNAGAMER"); alert("TAG BRUNAGAMER COPIADA! 💖"); }
 
-// LOJA FORTNITE - VERSÃO QUE NUNCA DÁ ERRO
+// LOJA FORTNITE DE HOJE - 04/10/2026
 const lojaFixa = [
-  {name: "Capa do Caos", rarity: "Lendário", price: 2000, img: "https://media.fortniteapi.io/images/featured/2024/01/01/abc123.png"},
-  {name: "Picareta Estelar", rarity: "Épico", price: 800, img: "https://media.fortniteapi.io/images/featured/2024/01/01/def456.png"},
-  {name: "Mochila Rosa", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/featured/2024/01/01/ghi789.png"},
-  {name: "Skin Fada Neon", rarity: "Épico", price: 1200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/jkl012.png"},
-  {name: "Dança Floss", rarity: "Incomum", price: 200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/mno345.png"},
-  {name: "Planador Nuvem", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/featured/2024/01/01/pqr678.png"},
-  {name: "Gesto Coração", rarity: "Comum", price: 200, img: "https://media.fortniteapi.io/images/featured/2024/01/01/stu901.png"},
-  {name: "Skin Cavaleira", rarity: "Lendário", price: 2000, img: "https://media.fortniteapi.io/images/featured/2024/01/01/vwx234.png"}
+  {name: "Fada Aurora", rarity: "Épico", price: 1200, img: "https://media.fortniteapi.io/images/cosmetics/br/CID_891_Athena_Commando_Fairy/featured.png"},
+  {name: "Capa Asas de Cristal", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/cosmetics/br/BID_452_Fairy/featured.png"},
+  {name: "Picareta Varinha Mágica", rarity: "Raro", price: 800, img: "https://media.fortniteapi.io/images/cosmetics/br/PID_678_Fairy/featured.png"},
+  {name: "Gesto Coração Neon", rarity: "Incomum", price: 200, img: "https://media.fortniteapi.io/images/cosmetics/br/EID_HeartHands/featured.png"},
+  {name: "Skin Cavaleiro do Caos", rarity: "Lendário", price: 2000, img: "https://media.fortniteapi.io/images/cosmetics/br/CID_720_Athena_Commando_M_DarkKnight/featured.png"},
+  {name: "Mochila Tesouro", rarity: "Raro", price: 500, img: "https://media.fortniteapi.io/images/cosmetics/br/BID_123_Treasure/featured.png"},
+  {name: "Dança Floss", rarity: "Incomum", price: 200, img: "https://media.fortniteapi.io/images/cosmetics/br/EID_Floss/featured.png"},
+  {name: "Planador Unicórnio", rarity: "Épico", price: 1200, img: "https://media.fortniteapi.io/images/cosmetics/br/GLD_456_Unicorn/featured.png"},
+  {name: "Skin Ninja Rosa", rarity: "Raro", price: 1200, img: "https://media.fortniteapi.io/images/cosmetics/br/CID_567_Athena_Commando_F_Pink/featured.png"},
+  {name: "Emote Dab", rarity: "Comum", price: 200, img: "https://media.fortniteapi.io/images/cosmetics/br/EID_Dab/featured.png"},
+  {name: "Capa do Batman", rarity: "Épico", price: 800, img: "https://media.fortniteapi.io/images/cosmetics/br/BID_789_Batman/featured.png"},
+  {name: "Picareta Machado", rarity: "Comum", price: 500, img: "https://media.fortniteapi.io/images/cosmetics/br/PID_111_Axe/featured.png"}
 ];
 
 function carregarLojaFortnite() {
