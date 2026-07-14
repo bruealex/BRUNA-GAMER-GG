@@ -292,3 +292,19 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
   transform: scale(1.1);
   box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
 }
+
+/* CAMPO DE BUSCA COSMÉTICOS */
+#buscaCosmetico {
+  width: 90%;
+  max-width: 500px;
+  padding: 15px 20px;
+  border: 3px solid var(--rosa);
+  border-radius: 50px;
+  font-size: 1.1rem;
+  margin: 20px 0 40px 0;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+}
+#buscaCosmetico:focus {
+  box-shadow: 0 0 20px rgba(255,0,255,0.5);
+}
