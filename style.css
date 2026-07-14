@@ -127,15 +127,32 @@ body {
   background: #0a0a0a;
   color: white;
 }
-.secao-branca h2, .secao-rosa h2, .secao-ilha h2 {
+
+/* TITULOS COM FUNDO NEON IGUAL AO BOTÃO CLIQUE AQUI */
+h2 {
+  background: linear-gradient(90deg, #FF00FF, #00FFFF);
+  color: white !important;
+  -webkit-text-fill-color: white;
+  display: inline-block;
+  padding: 15px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+  animation: neon-titulo 1.5s infinite alternate;
   font-family: 'Bebas Neue', sans-serif;
-  color: var(--rosa);
   font-size: 2.8rem;
   font-weight: 900;
   margin-bottom: 40px;
   letter-spacing: 3px;
 }
-.secao-rosa h2 { color: white; }
+
+@keyframes neon-titulo {
+  from {
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  }
+  to {
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+}
 
 /* RESTO IGUAL */
 .conteudo-yt { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: center; }
