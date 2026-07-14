@@ -1,12 +1,8 @@
-// Exemplo fictício para carregar a loja no seu Frontend
-async function carregarLojaFortnite() {
-    const resposta = await fetch('https://fortnite-api.com');
-    const dados = await resposta.json();
-    
-    const itensDaLoja = dados.data.featured.entries; // Puxa os itens em destaque
-    
-    itensDaLoja.forEach(item => {
-        console.log(`Item: ${item.name} - Preço: ${item.finalPrice} V-Bucks`);
-        // Aqui você insere o HTML para criar o card com a imagem do item
-    });
-}
+<section id="loja">
+  <h2 class="titulo-digita">🔥 LOJA DE HOJE 🔥</h2>
+  <p>Atualiza todo dia às 21h</p>
+  <div id="itens-loja" class="grid-loja">
+    <!-- Os itens vão carregar aqui automático -->
+    <p>Carregando loja...</p>
+  </div>
+</section>
