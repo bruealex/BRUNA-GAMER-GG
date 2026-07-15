@@ -1,28 +1,34 @@
 const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
 const CHANNEL_ID = "UCJfZ8_3Ir0ExpXaEKk24qQw";
 const API_KEY_FORT = "a549184f-2a7a-43f3-bad2-d19ca68a7f85";
-const API_URL = "https://dash.fortnite-api.com/v2/shop"; // MUDOU AQUI
+
+// Vamos usar SÓ a fortnite-api.com pq é mais estável
+const API_SHOP = "https://fortnite-api.com/v2/shop";
+const API_COSMETICS = "https://fortnite-api.com/v2/cosmetics/br";
 
 // 1. YOUTUBE
 async function carregarDadosYT() {
   try {
+    // Último vídeo
     const urlVideos = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&channelId=${CHANNEL_ID}&order=date&part=snippet&type=video&maxResults=1`;
     const resVideos = await fetch(urlVideos);
     const dataVideos = await resVideos.json();
     if(dataVideos.items && dataVideos.items.length > 0){
       const videoId = dataVideos.items[0].id.videoId;
-      document.getElementById("video").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+      document.getElementById("video").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen style="width:100%; height:400px; border-radius:15px;"></iframe>`;
     }
+
+    // Inscritos
     const urlCanal = `https://www.googleapis.com/youtube/v3/channels?key=${API_KEY_YT}&id=${CHANNEL_ID}&part=statistics`;
     const resCanal = await fetch(urlCanal);
     const dataCanal = await resCanal.json();
     const inscritos = parseInt(dataCanal.items[0].statistics.subscriberCount).toLocaleString('pt-BR');
     document.getElementById("contInscritos").innerText = inscritos;
-  } catch (error) { console.log("Erro YT:", error); }
+
+  } catch (error) {
+    console.log("Erro YT:", error);
   }
-  const res = await fetch('https://fortnite-api.com/v2/shop');
-  const shop = await res.json();
-console.log(shop.data);  // Today's shop items
+}
 
 // 2. COPIAR TAG
 function copiarTag() {
@@ -38,17 +44,15 @@ async function carregarLojaFortnite() {
   container.innerHTML = "<p>Carregando loja...</p>";
 
   try {
-    const resposta = await fetch(`${API_URL}/shop?lang=pt-BR`, {
-      headers: { 'Authorization': API_KEY_FORT }
-    });
+    const resposta = await fetch(API_SHOP);
     const dados = await resposta.json();
 
     container.innerHTML = "";
-    dados.shop.forEach(item => { // fortniteapi.io usa dados.shop
+    dados.data.featured.concat(dados.data.daily).forEach(item => {
       const card = `
         <div class="card-loja ${item.rarity.name}">
-          <img src="${item.displayAssets[0].background}" alt="${item.displayName}">
-          <h3>${item.displayName}</h3>
+          <img src="${item.images.icon}" alt="${item.name}">
+          <h3>${item.name}</h3>
           <p class="raridade">${item.rarity.name}</p>
           <p class="preco">💰 ${item.price.finalPrice} V-Bucks</p>
         </div>
@@ -56,7 +60,15 @@ async function carregarLojaFortnite() {
       container.innerHTML += card;
     });
 
-    document.getElementById("timer-loja").innerText = `Próxima atualização: Hoje às 21:00 BRT`;
+    // Calcula próxima 21h BRT
+    const agora = new Date();
+    const proxima = new Date();
+    proxima.setHours(21, 0, 0, 0);
+    if(agora.getHours() >= 21) proxima.setDate(proxima.getDate() + 1);
+    const diff = proxima - agora;
+    const horas = Math.floor(diff / 1000 / 60 / 60);
+    const minutos = Math.floor(diff / 1000 / 60) % 60;
+    document.getElementById("timer-loja").innerText = `Próxima atualização em: ${horas}h ${minutos}m`;
 
   } catch(erro) {
     console.log("Erro loja:", erro);
@@ -71,11 +83,9 @@ async function carregarTodosCosmeticos() {
   if(!container) return;
 
   try {
-    const resposta = await fetch(`${API_URL}/cosmetics/br?lang=pt-BR`, {
-      headers: { 'Authorization': API_KEY_FORT }
-    });
+    const resposta = await fetch(`${API_COSMETICS}?limit=200`);
     const dados = await resposta.json();
-    todosCosmeticos = dados.items;
+    todosCosmeticos = dados.data;
     mostrarCosmeticos(todosCosmeticos);
 
   } catch(erro) {
@@ -88,11 +98,11 @@ function mostrarCosmeticos(lista) {
   container.innerHTML = "";
   lista.slice(0, 60).forEach(item => {
     const card = `
-      <div class="card-loja ${item.rarity}">
+      <div class="card-loja ${item.rarity.name}">
         <img src="${item.images.icon}" alt="${item.name}">
-        <p class="raridade">${item.type}</p>
+        <p class="raridade">${item.type.name}</p>
         <h3>${item.name}</h3>
-        <p class="raridade">${item.rarity}</p>
+        <p class="raridade">${item.rarity.name}</p>
       </div>
     `;
     container.innerHTML += card;
@@ -111,7 +121,7 @@ function filtrarCosmeticos() {
   mostrarCosmeticos(filtrados);
 }
 
-// CARREGA TUDO
+// CARREGA TUDO QUANDO ABRIR A PÁGINA
 window.addEventListener('load', () => {
   carregarDadosYT();
   carregarLojaFortnite();
