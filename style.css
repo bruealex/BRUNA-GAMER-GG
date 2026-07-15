@@ -75,7 +75,7 @@ body {
   font-weight: 900;
   color: var(--branco) !important;
   letter-spacing: 4px;
-  animation: none !important; /* SEM ANIMAÇÃO */
+  animation: none !important;
   text-shadow: 0 3px 15px rgba(0,0,0,0.8);
 }
 .caixa-rosa {
@@ -86,7 +86,7 @@ body {
   font-weight: 900;
   font-size: 1.8rem;
   letter-spacing: 2px;
-  animation: none !important; /* SEM ANIMAÇÃO */
+  animation: none !important;
   text-shadow: 0 0 15px rgba(0,255,255,0.5);
 }
 
@@ -105,7 +105,7 @@ body {
   margin-top: 15px;
   box-shadow: 0 0 25px rgba(0,255,255,0.7);
   border: 2px solid white;
-  animation: pulsarBotao 1.5s infinite; /* SÓ ELE PULSA */
+  animation: pulsarBotao 1.5s infinite;
   transition: 0.3s;
 }
 .btn-rosa.btn-neon:hover { 
@@ -145,7 +145,7 @@ h2 {
   padding: 15px 40px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-  animation: none !important; /* TIREI ANIMAÇÃO */
+  animation: none !important;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.8rem;
   font-weight: 900;
@@ -219,3 +219,47 @@ footer { background: #111; color: #aaa; padding: 30px; text-align: center; }
   color: white;
 }
 #buscaCosmetico:focus { box-shadow: 0 0 20px rgba(0,255,255,0.5); }
+
+/* === SEÇÃO REDES NOVA === */
+.grid-redes { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 20px; 
+  max-width: 1000px;
+  margin: 30px auto 0;
+}
+
+.btn-rede { 
+  background: rgba(0,0,0,0.6); 
+  border: 2px solid var(--azul-neon); 
+  color: white; 
+  padding: 25px; 
+  border-radius: 20px; 
+  text-decoration: none; 
+  text-align: center; 
+  transition: 0.3s; 
+  backdrop-filter: blur(5px);
+}
+
+.btn-rede span { 
+  font-family: 'Bebas Neue'; 
+  font-size: 1.8rem; 
+  letter-spacing: 2px; 
+  display: block;
+}
+
+.btn-rede small { 
+  font-size: 0.9rem; 
+  color: var(--azul-neon); 
+  font-weight: 700;
+}
+
+.btn-rede:hover { 
+  transform: translateY(-8px); 
+  box-shadow: 0 0 25px var(--azul-neon); 
+}
+
+.btn-rede.tiktok:hover { border-color: #ff0050; box-shadow: 0 0 25px #ff0050; }
+.btn-rede.youtube:hover { border-color: #FF0000; box-shadow: 0 0 25px #FF0000; }
+.btn-rede.twitch:hover { border-color: #9146FF; box-shadow: 0 0 25px #9146FF; }
+.btn-rede.insta:hover { border-color: #E4405F; box-shadow: 0 0 25px #E4405F; }
