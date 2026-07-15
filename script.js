@@ -1,7 +1,7 @@
 const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
 const CHANNEL_ID = "UCJfZ8_3Ir0ExpXaEKk24qQw";
-const API_KEY_FORT = "e90b3fda0fa58e5e071b2d8a516d9469684d6b4c1d26243f41bb02781f740319";
-const API_URL = "https://fortniteapi.io/v2"; // MUDOU AQUI
+const API_KEY_FORT = "a549184f-2a7a-43f3-bad2-d19ca68a7f85";
+const API_URL = "https://dash.fortnite-api.com/v2/shop"; // MUDOU AQUI
 
 // 1. YOUTUBE
 async function carregarDadosYT() {
@@ -19,7 +19,10 @@ async function carregarDadosYT() {
     const inscritos = parseInt(dataCanal.items[0].statistics.subscriberCount).toLocaleString('pt-BR');
     document.getElementById("contInscritos").innerText = inscritos;
   } catch (error) { console.log("Erro YT:", error); }
-}
+  }
+  const res = await fetch('https://fortnite-api.com/v2/shop');
+  const shop = await res.json();
+console.log(shop.data);  // Today's shop items
 
 // 2. COPIAR TAG
 function copiarTag() {
