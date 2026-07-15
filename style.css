@@ -629,3 +629,33 @@ h1, h2, h3, p, .caixa-rosa p, .logo-menu, .links a {
  0%, 100% { transform: scale(1); }
  50% { transform: scale(1.05); }
 }
+
+/* FORÇAR TUDO APARECER EM BRANCO */
+body {
+  background: linear-gradient(135deg, #8A2BE2 0%, #00FFFF 100%) !important;
+  color: white !important;
+}
+
+h1, h2, h3, p, span, a {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* CAIXAS COM FUNDO ESCURO PRA DAR CONTRASTE */
+.caixa-branca, .caixa-branca-pequena {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid rgba(0,255,255,0.5);
+  border-radius: 20px;
+  padding: 30px 40px;
+  margin: 20px auto;
+  max-width: 750px;
+}
+
+/* TÍTULO SEM ANIMAÇÃO */
+.caixa-branca h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  letter-spacing: 3px;
+  animation: none !important;
+  text-shadow: 0 3px 15px rgba(0,0,0,0.8);
+}
