@@ -1,132 +1,73 @@
-const API_KEY_YT = "AIzaSyBbKchO-lmKebYMF6AE23PQEGDCn8LgDak";
-const CHANNEL_ID = "UCJfZ8_3Ir0ExpXaEKk24qQw";
-const API_KEY_FORT = "a549184f-2a7a-43f3-bad2-d19ca68a7f85";
-
-// Vamos usar SÓ a fortnite-api.com pq é mais estável
-const API_SHOP = "https://fortnite-api.com/v2/shop";
+const API_URL = "https://fortnite-api.com/v2/shop/br?language=pt-BR";
 const API_COSMETICS = "https://fortnite-api.com/v2/cosmetics/br";
 
-// 1. YOUTUBE
-async function carregarDadosYT() {
-  try {
-    // Último vídeo
-    const urlVideos = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY_YT}&channelId=${CHANNEL_ID}&order=date&part=snippet&type=video&maxResults=1`;
-    const resVideos = await fetch(urlVideos);
-    const dataVideos = await resVideos.json();
-    if(dataVideos.items && dataVideos.items.length > 0){
-      const videoId = dataVideos.items[0].id.videoId;
-      document.getElementById("video").innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen style="width:100%; height:400px; border-radius:15px;"></iframe>`;
-    }
+// CARREGAR LOJA EM TEMPO REAL
+async function carregarLoja() {
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  const grid = document.getElementById('grid-loja');
+  grid.innerHTML = "";
 
-    // Inscritos
-    const urlCanal = `https://www.googleapis.com/youtube/v3/channels?key=${API_KEY_YT}&id=${CHANNEL_ID}&part=statistics`;
-    const resCanal = await fetch(urlCanal);
-    const dataCanal = await resCanal.json();
-    const inscritos = parseInt(dataCanal.items[0].statistics.subscriberCount).toLocaleString('pt-BR');
-    document.getElementById("contInscritos").innerText = inscritos;
-
-  } catch (error) {
-    console.log("Erro YT:", error);
-  }
-}
-
-// 2. COPIAR TAG
-function copiarTag() {
-  navigator.clipboard.writeText("BRUNAGAMER");
-  alert("TAG BRUNAGAMER COPIADA! 💖");
-}
-
-// 3. LOJA FORTNITE TEMPO REAL 21H
-async function carregarLojaFortnite() {
-  const container = document.getElementById("itens-loja");
-  if(!container) return;
-
-  container.innerHTML = "<p>Carregando loja...</p>";
-
-  try {
-    const resposta = await fetch(API_SHOP);
-    const dados = await resposta.json();
-
-    container.innerHTML = "";
-    dados.data.featured.concat(dados.data.daily).forEach(item => {
-      const card = `
-        <div class="card-loja ${item.rarity.name}">
-          <img src="${item.images.icon}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <p class="raridade">${item.rarity.name}</p>
-          <p class="preco">💰 ${item.price.finalPrice} V-Bucks</p>
-        </div>
-      `;
-      container.innerHTML += card;
-    });
-
-    // Calcula próxima 21h BRT
-    const agora = new Date();
-    const proxima = new Date();
-    proxima.setHours(21, 0, 0, 0);
-    if(agora.getHours() >= 21) proxima.setDate(proxima.getDate() + 1);
-    const diff = proxima - agora;
-    const horas = Math.floor(diff / 1000 / 60 / 60);
-    const minutos = Math.floor(diff / 1000 / 60) % 60;
-    document.getElementById("timer-loja").innerText = `Próxima atualização em: ${horas}h ${minutos}m`;
-
-  } catch(erro) {
-    console.log("Erro loja:", erro);
-    container.innerHTML = "<p>Erro ao carregar. Recarrega a página.</p>";
-  }
-}
-
-// 4. TODOS OS COSMÉTICOS DA API
-let todosCosmeticos = [];
-async function carregarTodosCosmeticos() {
-  const container = document.getElementById("grid-cosmeticos");
-  if(!container) return;
-
-  try {
-    const resposta = await fetch(`${API_COSMETICS}?limit=200`);
-    const dados = await resposta.json();
-    todosCosmeticos = dados.data;
-    mostrarCosmeticos(todosCosmeticos);
-
-  } catch(erro) {
-    console.log("Erro cosmeticos:", erro);
-  }
-}
-
-function mostrarCosmeticos(lista) {
-  const container = document.getElementById("grid-cosmeticos");
-  container.innerHTML = "";
-  lista.slice(0, 60).forEach(item => {
+  data.data.entries.forEach(item => {
     const card = `
-      <div class="card-loja ${item.rarity.name}">
-        <img src="${item.images.icon}" alt="${item.name}">
-        <p class="raridade">${item.type.name}</p>
-        <h3>${item.name}</h3>
-        <p class="raridade">${item.rarity.name}</p>
+      <div class="card-item">
+        <button class="btn-favorito" onclick="toggleFavorito(this, '${item.items[0].id}')">⭐</button>
+        <img src="${item.items[0].images.icon}" alt="${item.items[0].name}">
+        <h3>${item.items[0].name}</h3>
+        <p class="preco">${item.finalPrice} V-Bucks</p>
       </div>
     `;
-    container.innerHTML += card;
+    grid.innerHTML += card;
   });
 }
 
-function filtrarCosmeticos() {
-  const busca = document.getElementById("buscaCosmetico").value.toLowerCase();
-  const container = document.getElementById("grid-cosmeticos");
-  const filtrados = todosCosmeticos.filter(item => item.name.toLowerCase().includes(busca));
+// CARREGAR SKINS, EMOTES, PICARETAS
+async function carregarCosmeticos() {
+  const res = await fetch(API_COSMETICS);
+  const data = await res.json();
+  
+  const skins = data.data.filter(i => i.type.value === 'outfit').slice(0,20);
+  const emotes = data.data.filter(i => i.type.value === 'emote').slice(0,20);
+  const picaretas = data.data.filter(i => i.type.value === 'pickaxe').slice(0,20);
 
-  if(filtrados.length === 0) {
-    container.innerHTML = "<p>Nenhum cosmético encontrado 😢</p>";
-    return;
-  }
-  mostrarCosmeticos(filtrados);
+  preencherGrid('grid-skins', skins);
+  preencherGrid('grid-emotes', emotes);
+  preencherGrid('grid-picaretas', picaretas);
 }
 
-// CARREGA TUDO QUANDO ABRIR A PÁGINA
-window.addEventListener('load', () => {
-  carregarDadosYT();
-  carregarLojaFortnite();
-  carregarTodosCosmeticos();
+function preencherGrid(id, itens) {
+  const grid = document.getElementById(id);
+  grid.innerHTML = "";
+  itens.forEach(item => {
+    grid.innerHTML += `
+      <div class="card-item">
+        <button class="btn-favorito" onclick="toggleFavorito(this, '${item.id}')">⭐</button>
+        <img src="${item.images.icon}" alt="${item.name}">
+        <h3>${item.name}</h3>
+      </div>
+    `;
+  });
+}
 
-  // ATUALIZA LOJA A CADA 5 MIN
-  setInterval(carregarLojaFortnite, 300000);
-});
+// SISTEMA DE FAVORITOS
+function toggleFavorito(btn, id) {
+  let favs = JSON.parse(localStorage.getItem('fav_brunagamer')) || [];
+  if(favs.includes(id)) {
+    favs = favs.filter(f => f !== id);
+    btn.classList.remove('ativo');
+  } else {
+    favs.push(id);
+    btn.classList.add('ativo');
+  }
+  localStorage.setItem('fav_brunagamer', JSON.stringify(favs));
+}
+
+// CURTIR ELEMENTAIS
+function curtir(btn) {
+  let span = btn.querySelector('span');
+  span.innerText = parseInt(span.innerText) + 1;
+}
+
+// INICIAR
+carregarLoja();
+carregarCosmeticos();
