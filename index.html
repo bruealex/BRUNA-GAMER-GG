@@ -3,115 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRUNA GAMER - Criadora de Conteúdo Fortnite</title>
-  
-  <!-- FONTE FORTNITE -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  
+  <title>BRUNA GAMER - Loja e Missões Fortnite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav class="menu">
-    <div class="logo-menu">BRUNA GAMER</div>
+    <h1 class="logo">BRUNA GAMER</h1>
     <div class="links">
-      <a href="#">INÍCIO</a>
-      <a href="#sobre">SOBRE MIM</a>
       <a href="#loja">LOJA</a>
-      <a href="#cosmeticos">COSMÉTICOS</a>
-      <a href="#ilha">ILHA</a>
-      <a href="#redes">REDES</a>
+      <a href="#stm">SALVE O MUNDO</a>
+      <a href="#elementais">ELEMENTAIS</a>
+      <a href="#skins">SKINS</a>
+      <a href="#emotes">EMOTES</a>
+      <a href="#picaretas">PICARETAS</a>
+      <a href="#favoritos">FAVORITOS ❤️</a>
     </div>
   </nav>
 
   <header class="banner">
-    <div class="caixa-branca">
-      <h1>BRUNA GAMER</h1>
-    </div>
-    <div class="caixa-rosa">
-      <p>Criadora de Conteúdo & Mapas no Fortnite</p>
-    </div>
-    <div class="caixa-branca-pequena">
-      <p>"Bem-vindo ao meu site oficial! Aqui você encontra os códigos das minhas ilhas do Criativo e minhas transmissões ao vivo. Obrigado por fazer parte da nossa comunidade!"</p>
-    </div>
-    <a href="https://youtube.com/@brunagamerrr" target="_blank" class="btn-rosa btn-neon">Clique aqui</a>
+    <h2>LOJA DE ITENS EM TEMPO REAL</h2>
+    <p>Atualiza todo dia às 21h BR</p>
+    <div id="timer-loja">Próxima atualização em: 12h 34m</div>
   </header>
 
-  <section id="sobre" class="secao-branca">
-    <h2>MEU CANAL NO YOUTUBE</h2>
-    <div class="conteudo-yt">
-      <div id="video"></div>
-      <div class="info-yt">
-        <h3>Se inscreve e ativa o sininho 🔔</h3>
-        <p>Fortnite, gameplays, lives e muito mais!</p>
-        <div class="inscritos"><span id="contInscritos">0</span> Inscritos</div>
+  <!-- LOJA DE ITENS -->
+  <section id="loja" class="secao">
+    <h2 class="titulo-secao">🔥 LOJA DE HOJE 🔥</h2>
+    <div id="grid-loja" class="grid-itens">
+      <!-- A loja vai carregar aqui via API -->
+      <p class="carregando">Carregando loja...</p>
+    </div>
+  </section>
+
+  <!-- SALVE O MUNDO -->
+  <section id="stm" class="secao fundo-escuro">
+    <h2 class="titulo-secao">🧟 SALVE O MUNDO 🧟</h2>
+    <div class="grid-stm">
+      <div class="card-stm">
+        <h3>MISSÕES DIÁRIAS</h3>
+        <ul id="missoes-diarias">
+          <li>Complete 3 missões de defesa - <span class="recompensa">100 VBks</span></li>
+          <li>Derrote 500 zumbis - <span class="recompensa">50 VBks</span></li>
+        </ul>
+      </div>
+      <div class="card-stm">
+        <h3>HERÓIS EM DESTAQUE</h3>
+        <div id="herois-stm" class="grid-pequeno">
+          <div class="item-peq"><img src="https://fortnite-api.com/images/creative/heroes/hero_cid_016_vampirehunter_m.png"><p>Vampiro Caçador</p></div>
+        </div>
+      </div>
+      <div class="card-stm">
+        <h3>ALERTAS DE VBKS</h3>
+        <p>Missão: Vale a Pena - <span class="recompensa">35 VBks</span></p>
       </div>
     </div>
   </section>
 
-  <!-- SEÇÃO DA LOJA FORTNITE -->
-  <section id="loja" class="secao-rosa">
-    <h2>🔥 LOJA DE HOJE 🔥</h2>
-    <p>Atualiza todo dia às 21h</p>
-    <div id="itens-loja" class="grid-loja">
-      <p>Carregando loja...</p>
+  <!-- ELEMENTAIS -->
+  <section id="elementais" class="secao">
+    <h2 class="titulo-secao">⚡ ELEMENTAIS DO FORTNITE ⚡</h2>
+    <p>Clique no ❤️ pra curtir e comente seu favorito!</p>
+    <div id="grid-elementais" class="grid-itens">
+      <div class="card-item" data-id="fogo">
+        <img src="https://cdn2.unrealengine.com/Fortnite/fortnite-elemental-fire-1920x1080-8f7e6b5b3b3b.jpg">
+        <h3>Fogo</h3>
+        <button class="btn-curtir" onclick="curtir(this)">❤️ <span>0</span></button>
+        <input type="text" placeholder="Comente..." class="input-coment">
+      </div>
+      <div class="card-item" data-id="agua">
+        <img src="https://cdn2.unrealengine.com/Fortnite/fortnite-elemental-water-1920x1080-8f7e6b5b3b3b.jpg">
+        <h3>Água</h3>
+        <button class="btn-curtir" onclick="curtir(this)">❤️ <span>0</span></button>
+        <input type="text" placeholder="Comente..." class="input-coment">
+      </div>
+      <div class="card-item" data-id="terra">
+        <img src="https://cdn2.unrealengine.com/Fortnite/fortnite-elemental-earth-1920x1080-8f7e6b5b3b3b.jpg">
+        <h3>Terra</h3>
+        <button class="btn-curtir" onclick="curtir(this)">❤️ <span>0</span></button>
+        <input type="text" placeholder="Comente..." class="input-coment">
+      </div>
+      <div class="card-item" data-id="ar">
+        <img src="https://cdn2.unrealengine.com/Fortnite/fortnite-elemental-air-1920x1080-8f7e6b5b3b3b.jpg">
+        <h3>Ar</h3>
+        <button class="btn-curtir" onclick="curtir(this)">❤️ <span>0</span></button>
+        <input type="text" placeholder="Comente..." class="input-coment">
+      </div>
     </div>
   </section>
 
-  <!-- SEÇÃO NOVA TODOS OS COSMÉTICOS -->
-  <section id="cosmeticos" class="secao-branca">
-    <h2>🎁 TODOS OS COSMÉTICOS 🎁</h2>
-    <p>Busque qualquer skin, picareta, dança e mais!</p>
-    
-    <input type="text" id="buscaCosmetico" placeholder="Digite o nome da skin..." onkeyup="filtrarCosmeticos()">
-    
-    <div id="grid-cosmeticos" class="grid-loja">
-      <p>Carregando todos os cosméticos...</p>
-    </div>
+  <!-- SKINS -->
+  <section id="skins" class="secao fundo-escuro">
+    <h2 class="titulo-secao">👗 TODAS AS SKINS 👗</h2>
+    <input type="text" id="busca-skin" placeholder="Buscar skin..." onkeyup="buscarItem('skin')">
+    <div id="grid-skins" class="grid-itens"></div>
   </section>
 
-  <!-- SEÇÃO NOVA DA ILHA -->
-  <section id="ilha" class="secao-ilha">
-    <h2>JOGUE NO MEU MAPA! 🎮</h2>
-    <p>Confira esta Ilha e me ajude a crescer no Fortnite!</p>
-    <a href="https://www.fortnite.com/@brunagamer/7154-6149-1460" target="_blank" class="btn-ilha">
-      ENTRAR NA ILHA: 7154-6149-1460
-    </a>
-    <p style="color: #aaa; font-size: 0.9rem; margin-top: 15px;">Código: 7154-6149-1460</p>
+  <!-- EMOTES -->
+  <section id="emotes" class="secao">
+    <h2 class="titulo-secao">💃 EMOTES 💃</h2>
+    <div id="grid-emotes" class="grid-itens"></div>
   </section>
 
-  <section id="tag" class="secao-branca">
-    <h2>USE MINHA TAG DE APOIADOR</h2>
-    <div class="tag-box">
-      <p>BRUNAGAMER</p>
-      <button class="btn-neon" onclick="copiarTag()">COPIAR TAG</button>
-    </div>
+  <!-- PICARETAS -->
+  <section id="picaretas" class="secao fundo-escuro">
+    <h2 class="titulo-secao">⛏️ PICARETAS ⛏️</h2>
+    <div id="grid-picaretas" class="grid-itens"></div>
   </section>
 
-  <!-- SEÇÃO REDES ATUALIZADA COM TIKTOK -->
-  <section id="redes" class="secao-rosa">
-    <h2>📱 ME SIGA NAS REDES 📱</h2>
-    <div class="grid-redes">
-      <a href="https://youtube.com/@brunagamerrr" target="_blank" class="btn-rede youtube">
-        <span>YOUTUBE</span>
-        <small>@brunagamerrr</small>
-      </a>
-      <a href="https://www.tiktok.com/@bbbrunagamerrr?is_from_webapp=1&sender_device=pc" target="_blank" class="btn-rede tiktok">
-        <span>TIKTOK</span>
-        <small>@bbbrunagamerrr</small>
-      </a>
-      <a href="https://www.twitch.tv/brunagamerrr" target="_blank" class="btn-rede twitch">
-        <span>TWITCH</span>
-        <small>brunagamerrr</small>
-      </a>
-      <a href="https://www.instagram.com/bruna.gamerr/" target="_blank" class="btn-rede insta">
-        <span>INSTAGRAM</span>
-        <small>@bruna.gamerr</small>
-      </a>
+  <!-- FAVORITOS -->
+  <section id="favoritos" class="secao">
+    <h2 class="titulo-secao">❤️ MEUS FAVORITOS ❤️</h2>
+    <div id="grid-favoritos" class="grid-itens">
+      <p>Salve seus itens clicando na estrela ⭐</p>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 BRUNA GAMER | Feito com 💖</p>
+    <p>© 2026 BRUNA GAMER | Feito por fãs, para fãs. Dados via Fortnite-API.com</p>
   </footer>
 
   <script src="script.js"></script>
