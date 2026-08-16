@@ -16,7 +16,7 @@ Site com a **loja de itens em tempo real**, missões do **Salve o Mundo**, guia 
 - **Design**: Tema Fortnite - Fundo Preto + Roxo + Amarelo
 
 ## 🚀 COMO ACESSAR
-**Link Oficial**: https://bruna-gamer.netlify.app
+**Link Oficial**: 
 
 ## 🛠️ TECNOLOGIAS USADAS
 - `HTML5`
